@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,10 +8,6 @@ void main() {
     MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.blue,
-        appBar: AppBar(
-          title: Text('Dicee'),
-          backgroundColor: Colors.blueGrey,
-        ),
         body: DicePage(),
       ),
     ),
@@ -34,26 +31,38 @@ class _DicePageState extends State<DicePage> {
   int rightDiceNumber = 1;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              onPressed: (){
-                changeDice();
-              },
-              child: Image.asset('images/dice$leftDiceNumber.png'),
+    return SafeArea(
+      child: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [Text('DICE',style: TextStyle(color: Colors.white,fontSize: 60,fontWeight: FontWeight.bold),),
+            Container(color: Colors.white.withOpacity(.2),
+              child: Column(
+                children: [SizedBox(height: 20,),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: (){
+                            changeDice();
+                          },
+                          child: Image.asset('images/dice$leftDiceNumber.png'),
+                        ),
+                      ),
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: (){
+                            changeDice();
+                          },
+                          child: Image.asset('images/dice$rightDiceNumber.png'),
+                        ),
+                      ),
+                    ],
+                  ),SizedBox(height: 20,)
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: FlatButton(
-              onPressed: (){
-                changeDice();
-              },
-              child: Image.asset('images/dice$rightDiceNumber.png'),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
